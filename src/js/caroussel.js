@@ -1,7 +1,8 @@
 const carouselText = [
-    { letter:"B", text: "ABC", color: "grey" },
-    { letter:"A", text: "ABC", color: "grey" },
-    { letter:"C", text: "ABC", color: "grey" },
+    { letter:"B", text: "ABC", color: "#744b76" },
+    { letter:"A", text: "ABC", color: "#744b76" },
+    { letter:"C", text: "ABC", color: "#744b76" },
+
 
 ];
 
@@ -23,7 +24,6 @@ async function typeSentence(sentence, eleRef, delay = 100) {
     }
 }
 async function typeWithCenterLetter(config, eleRef, delay = 250) {
-    const arrow = document.querySelector("#arrow");
     const { letter, text, color } = config;
     const element = document.querySelector(eleRef);
 
@@ -44,7 +44,7 @@ async function typeWithCenterLetter(config, eleRef, delay = 250) {
         const span = document.createElement("span");
 
         if (i === index) {
-            span.innerHTML = `<span style="color: ${color}; font-weight: bold;">${letter}</span>`;
+            span.innerHTML = `<span style="color: ${color}; font-weight: bold;letter-spacing: 8px">${letter}</span>`;
         } else {
             span.textContent = "_";
             span.classList.add("placeholder");
@@ -64,24 +64,21 @@ async function typeWithCenterLetter(config, eleRef, delay = 250) {
 
         await waitForMs(100);
         span.textContent = char;
-        span.style.color = "green"; 
+        span.style.color = "#4D764B"; 
 
         await waitForMs(500);
         span.style.color = "white";
     };
 
     for (let i = left.length - 1; i >= 0; i--) {
-        arrow.textContent = "←";
         await waitForMs(delay);
         await addLetterWithAnimation(left[i], i);
     }
 
     for (let i = 0; i < right.length; i++) {
-        arrow.textContent = "→";
         await waitForMs(delay);
         await addLetterWithAnimation(right[i], index + i);
     }
-    triggerSuccessAnimation()
 }
 async function deleteSentence(eleRef, delay = 100) {
     const element = document.querySelector(eleRef);
@@ -130,17 +127,6 @@ async function carousel(carouselList, eleRef) {
 }
  carousel(carouselText, "#carousel");   
 
- function triggerSuccessAnimation() {
-    const arrow = document.getElementById("arrow");
-
-    arrow.textContent = "good!";
-    arrow.classList.add("success"); 
-
-    setTimeout(() => {
-        arrow.classList.remove("success");
-        arrow.textContent = "";
-    }, 1500);
-  }
 
 
 

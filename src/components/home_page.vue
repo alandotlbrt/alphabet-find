@@ -2,8 +2,7 @@
 <template>
 
     <div class="title">
-        <p class="arrow" id="arrow">example</p>
-        <h1><span class="title-text" id="carousel">Alphabet</span><span class="input-cursor"></span>
+        <h1><span class="title-text" id="carousel">A<span style="color: #4D764B;">l</span>p<span style="color: #744b76;">h</span>a<span style="color: #4D764B;">b</span>e<span style="color: #cc334c;">t</span>.</span><span class="input-cursor"></span>
       </h1>
     </div>
 </template>
@@ -22,6 +21,8 @@
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-left: 25px;
+  
   }
 
   .title-text{
@@ -29,15 +30,9 @@
     transition: color 0.3s linear;
     font-size:100px;
   }
-
-  .arrow {
-    min-height: 40px;
-    animation: slideFadeIn 0.6s ease-out forwards;
-    font-size: 2rem;
-    display: inline-block;
-    color: white;
-    transition: transform 0.3s ease, color 0.3s ease;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  .placeholder{
+    letter-spacing: 8px;
+    transition: color 0.3s linear;
   }
 
   .appear{
