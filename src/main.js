@@ -1,4 +1,3 @@
-
 import './assets/main.css'
 import './assets/cursor.css'
 import { createApp } from 'vue'

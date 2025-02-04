@@ -1,7 +1,8 @@
 const carouselText = [
-    { letter:"D", text: "ABCDEFG", color: "blue" },
-    { letter:"A", text: "ABCDEFG", color: "#a92475" },
-    { letter:"G", text: "ABCDEFG", color: "#a92475" },
+    { letter:"B", text: "ABC", color: "grey" },
+    { letter:"A", text: "ABC", color: "grey" },
+    { letter:"C", text: "ABC", color: "grey" },
+
 ];
 
 function waitForMs(ms) {
@@ -25,7 +26,6 @@ async function typeWithCenterLetter(config, eleRef, delay = 250) {
     const arrow = document.querySelector("#arrow");
     const { letter, text, color } = config;
     const element = document.querySelector(eleRef);
-    const cursor = document.querySelector(".input-cursor");
 
     if (!element) {
         console.error(`L'élément avec le sélecteur "${eleRef}" n'a pas été trouvé.`);
@@ -38,52 +38,50 @@ async function typeWithCenterLetter(config, eleRef, delay = 250) {
         return;
     }
 
-    element.innerHTML = `<span style="color: ${color}; font-weight: bold;">${letter}</span>`;
+    element.innerHTML = ""; 
 
-    const left = text.slice(0, index).split("").reverse();
+    for (let i = 0; i < text.length; i++) {
+        const span = document.createElement("span");
+
+        if (i === index) {
+            span.innerHTML = `<span style="color: ${color}; font-weight: bold;">${letter}</span>`;
+        } else {
+            span.textContent = "_";
+            span.classList.add("placeholder");
+        }
+
+        element.appendChild(span);
+
+        await waitForMs(100);
+    }
+
+    const placeholders = element.querySelectorAll(".placeholder");
+    const left = text.slice(0, index).split("");
     const right = text.slice(index + 1).split("");
 
-    const addLetterWithAnimation = async (char, position = "left") => {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.style.color = 'green';
-        span.style.transition = 'color 0.5s ease';
+    const addLetterWithAnimation = async (char, position) => {
+        const span = placeholders[position];
 
-        if (position === "left") {
-            element.prepend(span);
-        } else {
-            element.append(span);
-        }
+        await waitForMs(100);
+        span.textContent = char;
+        span.style.color = "green"; 
 
         await waitForMs(500);
-        span.style.color = 'white';
+        span.style.color = "white";
     };
 
-    const setCursorPosition = (position) => {
-        if (position === "left") {
-            cursor.classList.add("cursor-left");
-            element.parentNode.insertBefore(cursor, element);
-        } else {
-            cursor.classList.remove("cursor-left");
-            element.parentNode.appendChild(cursor);
-        }
-    };
-
-    for (const char of left) {
+    for (let i = left.length - 1; i >= 0; i--) {
         arrow.textContent = "←";
-        setCursorPosition("left");
         await waitForMs(delay);
-        await addLetterWithAnimation(char, "left");
+        await addLetterWithAnimation(left[i], i);
     }
 
-    for (const char of right) {
+    for (let i = 0; i < right.length; i++) {
         arrow.textContent = "→";
-        setCursorPosition("right");
         await waitForMs(delay);
-        await addLetterWithAnimation(char, "right");
+        await addLetterWithAnimation(right[i], index + i);
     }
-    arrow.textContent = "nice! ";
-
+    triggerSuccessAnimation()
 }
 async function deleteSentence(eleRef, delay = 100) {
     const element = document.querySelector(eleRef);
@@ -132,6 +130,17 @@ async function carousel(carouselList, eleRef) {
 }
  carousel(carouselText, "#carousel");   
 
+ function triggerSuccessAnimation() {
+    const arrow = document.getElementById("arrow");
+
+    arrow.textContent = "good!";
+    arrow.classList.add("success"); 
+
+    setTimeout(() => {
+        arrow.classList.remove("success");
+        arrow.textContent = "";
+    }, 1500);
+  }
 
 
 
