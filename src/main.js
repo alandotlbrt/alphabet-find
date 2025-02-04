@@ -1,4 +1,6 @@
+
 import './assets/main.css'
+import './assets/cursor.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import home from './components/home_page.vue'
