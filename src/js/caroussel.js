@@ -1,5 +1,5 @@
 const carouselText = [
-    { letter:"B", text: "ABC", color: "#744b76" },
+    { letter:"B", text: "ABCEFGHIG", color: "#744b76" },
     { letter:"A", text: "ABC", color: "#744b76" },
     { letter:"C", text: "ABC", color: "#744b76" },
 
