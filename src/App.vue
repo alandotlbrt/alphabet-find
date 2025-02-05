@@ -1,5 +1,3 @@
-
 <template>
-    <home_page/>
-</template>
-
+    <router-view></router-view>
+  </template>

@@ -3,12 +3,12 @@
 
     <div class="title">
         <h1><span class="title-text" id="carousel">A<span style="color: #4D764B;">l</span>p<span style="color: #744b76;">h</span>a<span style="color: #4D764B;">b</span>e<span style="color: #cc334c;">t</span>.</span><span class="input-cursor"></span></h1>
-        <button>Play</button>
+        <router-link to="/play">
+          <button>Jouer</button>
+        </router-link>
     </div>
 </template>
 
-<script>  
-</script>
 
 
 
