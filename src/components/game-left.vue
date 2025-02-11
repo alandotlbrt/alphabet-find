@@ -1,12 +1,19 @@
 <template>
-    <div class="input-container">
+    <div  @click="focusInput">
+
       <input
+        ref="hiddenInput"
         type="text"
-        class="minimal-input reversed"
-        :value="displayText"
-        @keydown="handleKey"
-        ref="inputField"
+        v-model="tempInput"
+        class="hidden-input"
+        @input="handleInput"
       />
+  
+     
+      <div class="text-typing-div">
+        <span class="input-cursor"></span>
+        <div class="word"> {{ userInput }}<span style='color: blue;'>F</span> </div>
+      </div>
     </div>
   </template>
   
@@ -14,42 +21,30 @@
   export default {
     data() {
       return {
-        userInput: "",
-        fixedLetter: "F", 
-        maxLetters: 5,
+        tempInput: "", 
+        userInput: "", 
       };
     },
     computed: {
-
-      displayText() {
-        return this.userInput + this.fixedLetter;
+        processedWord() {
+            const reversed = this.userInput.split("").reverse().join("");
+            return `${reversed.slice(1)}<span style='color: blue;'>F</span>`;
+        },
+    },
+    methods: {
+      handleInput(event) {
+        const value = event.target.value;
+        this.tempInput = value.toUpperCase();        
+        this.userInput = this.tempInput;
+      },
+      focusInput() {
+        this.$refs.hiddenInput.focus();
       },
     },
     mounted() {
-      this.$refs.inputField.focus();
-      this.$refs.inputField.setSelectionRange(0, 0); 
-
-    },
-    methods: {
-      handleKey(event) {
-        const inputField = this.$refs.inputField;
-  
-        if (/^[a-zA-Z]$/.test(event.key) && this.userInput.length < this.maxLetters) {
-            this.userInput = event.key.toUpperCase() + this.userInput; 
-            event.preventDefault();
-        } else if (event.key === "Backspace" && this.userInput.length > 0) {
-
-            this.userInput = this.userInput.slice(1);
-            event.preventDefault();
-        } else {
-
-            event.preventDefault();
-        }
-
-        this.$nextTick(() => {
-          inputField.setSelectionRange(0, 0); 
-        });
-      },
+      this.focusInput(); 
     },
   };
   </script>
+
+  
