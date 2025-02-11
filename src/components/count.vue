@@ -10,10 +10,10 @@ import { count_text } from '../js/game/count.js'
 export default {
     setup(_, { emit }) { 
         onMounted(() => {
-            count_text().then(() => {
-                console.log("go!");
+            emit('count-completed', true); 
+           /*  count_text().then(() => {
                 emit('count-completed', true); 
-            });
+            }); */
         });
     }
 };

@@ -11,6 +11,16 @@
 
 
 
+<script>
+import { carousel } from '../js/caroussel.js';
+export default{
+  mounted(){
+      carousel("#carousel");   
+  }
+}
+
+</script>
+
 
 <style >
   .title{

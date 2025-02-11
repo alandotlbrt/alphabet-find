@@ -104,7 +104,8 @@ async function deleteSentence(eleRef, delay = 100) {
         }
     }
 }
-async function carousel(carouselList, eleRef) {
+export async function carousel( eleRef) {
+    let carouselList = carouselText
     await waitForMs(500); 
     await deleteSentence(eleRef);
     
@@ -125,7 +126,7 @@ async function carousel(carouselList, eleRef) {
         i = (i + 1) % carouselList.length; 
     }
 }
- carousel(carouselText, "#carousel");   
+
 
 
 
