@@ -16,6 +16,7 @@ const app = createApp(App)
 app.component('home_page', home)
 app.component('game_page', game)
 
+
 app.config.devtools = false
 app.config.productionTip = false
 
@@ -27,3 +28,4 @@ app.use(router)
 app.mount('#app')
 
 
+export default app

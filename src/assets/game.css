@@ -18,3 +18,7 @@
     display: flex;
     align-items: center;
   }
+
+  .choosen-letter{
+    color:  #744b76;
+  }

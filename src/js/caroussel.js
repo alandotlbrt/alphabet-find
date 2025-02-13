@@ -1,3 +1,5 @@
+import app from "../main.js";
+
 const carouselText = [
     { letter:"B", text: "ABCEFGHIG", color: "#744b76" },
     { letter:"A", text: "ABC", color: "#744b76" },
@@ -113,6 +115,10 @@ export async function carousel( eleRef) {
     let i = 0;
 
     while (true) {
+        if(!document.querySelector(eleRef)){
+            break
+        }
+        
         const { letter, text, color } = carouselList[i];
 
         await typeWithCenterLetter({ letter, text, color }, eleRef, 200);
