@@ -6,7 +6,7 @@ import failur from "../views/failur_page.vue"
 const routes = [
   { path: '/', component: home, name : 'home' },
   { path: '/play', component: game, name: 'game'},
-  { path: '/failur', component: failur, name: 'failur'},
+  { path: '/failur', component: failur, name: 'failur' }
 ]
 
 const router = createRouter({

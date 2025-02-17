@@ -1,7 +1,7 @@
 <template>
     <header class="game-header">
       <h1>Round : {{ victories }}</h1>
-      <h1>Letter : {{ letter_succesful }}</h1>
+      <h1>Letters : {{ letter_succesful }}</h1>
       <router-link to="/">
         <button class="red-button">Leave</button>
       </router-link>
@@ -56,7 +56,8 @@
         if (!this.isLetter(input.slice(-1))) {return}
         if (this.direction=="left"){
             if (input.slice(-1) != this.game_data.list[this.game_data.list.length - this.userInput.length -1 ]){
-                this.$router.push('/failur')
+
+              this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful } });
             } else {
                 this.userInput = input.split('').reverse().join('');
                 this.letter_left = this.letter_left - 1
@@ -70,7 +71,7 @@
             }
         } else {
           if (input.slice(-1) != this.game_data.list[input.length-1]){
-            this.$router.push('/failur')
+            this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful } });
           } else {
             this.userInput = input;
             this.letter_left = this.letter_left - 1;
@@ -87,7 +88,7 @@
       focusInput() {
           this.$refs.hiddenInput.focus();
       },
-      restartGame(input) {
+      restartGame() {
         this.game_data = game_methods.random_game()
         this.userInput = "";
         this.letter_left = this.game_data.number;
@@ -102,6 +103,7 @@
       },
     },
     mounted() {
+
         this.game_data = game_methods.random_game()
         this.choosen_letter = this.game_data.letter, this.direction = this.game_data.direction, this.final_string = Object.keys(this.game_data.list).reduce((acc, key) => acc + this.game_data.list[key], ''),this.letter_left = this.game_data.number, this.letter_lenght = this.final_string.length
         this.focusInput(); 
