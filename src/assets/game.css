@@ -1,4 +1,15 @@
-  
+  .game-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    gap: 2vw;
+  }
+
+  .red-button{
+    background-color: #cc334c;
+  }
+
 
   .hidden-input {
     position: absolute;
@@ -7,7 +18,7 @@
   }
 
 
-  .text-typing-div{
+  .text-typing-div {
     color: white;
     font-size: 6em;
     font-weight: bold;
@@ -19,6 +30,6 @@
     align-items: center;
   }
 
-  .choosen-letter{
-    color:  #744b76;
+  .choosen-letter {
+    color: #744b76;
   }

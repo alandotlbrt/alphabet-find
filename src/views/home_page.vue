@@ -57,23 +57,6 @@ export default{
     color: #2bca30;
     transform: scale(1.1);
   }
-
-  button{
-    cursor: pointer;
-    border-radius: 50px;
-    color: white;
-    background-color: #744b76;
-    border: none;
-    font-size: 2.5vh;
-    width: 6vw;
-    height: 5vh;
-    transition-duration: 0.2s;
-
-  }
-  button:hover{
-    filter: brightness(150%);
-  }
-
     @keyframes successEffect {
       0% { transform: scale(1); color: white; }
       50% { transform: scale(1.2) rotate(2deg); color: #2bca30 }
