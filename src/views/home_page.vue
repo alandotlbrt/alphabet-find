@@ -40,7 +40,7 @@ export default{
     animation: slideFadeIn 0.2s ease-out forwards;
     transition: color 0.3s linear;
     font-size:100px;
-    margin-left: 18px;
+    margin-left: 22px;
   }
 
   .placeholder{

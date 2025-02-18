@@ -16,11 +16,11 @@
       />
         <div class="text-typing-div" @click="focusInput">
             <div class="vertical">
-                <div class="horizontal" v-if="direction=='left'">
+                <div class="horizontal input-gap-right" v-if="direction=='left'">
                     <span class="input-cursor"></span>
                     <div class="word"> <span class="user-input">{{ userInput }}</span><span class="choosen-letter">{{ choosen_letter }}</span></div>
                 </div>
-                <div class="horizontal" v-if="direction=='right'">
+                <div class="horizontal input-gap-left" v-if="direction=='right'">
                     <div class="word"> <span class="choosen-letter">{{ choosen_letter }}</span><span class="user-input">{{ userInput }}</span></div>
                     <span class="input-cursor"></span>
                 </div>
