@@ -2,21 +2,30 @@ var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 
 
 
-function random_letter(){
+function random_letter(alphabet_slice){
     let letter = alphabet[Math.floor(Math.random() * alphabet.length)]
-    return {letter:letter, index:alphabet.indexOf(letter)}
+    if (alphabet_slice.includes(letter.toLocaleLowerCase())){
+        return {letter:letter, index:alphabet.indexOf(letter)}
+    } else {
+        return random_letter(alphabet_slice)
+    }
 }
-function random_number(letter) {
+function random_number(letter, input_value_max = 25) {
     let index_before = 0;
     let index_after = 0;
 
     if (letter.index > 0) {
-        index_before = Math.ceil(Math.random() * letter.index);
+        do {
+            index_before = Math.ceil(Math.random() * letter.index);
+        } while (index_before >= input_value_max);
     }
 
     if (letter.index < alphabet.length - 1) {
-        index_after = Math.ceil(Math.random() * (alphabet.length - letter.index - 1));
+        do {
+            index_after = Math.ceil(Math.random() * (alphabet.length - letter.index - 1));
+        } while (index_after >= input_value_max);
     }
+    
 
     if (index_before > 0 && index_after > 0) {
         return Math.random() < 0.5
@@ -30,8 +39,8 @@ function random_number(letter) {
 }
 const game_methods = {
 
-    random_game:function(){
-        return random_number(random_letter());
+    random_game:function(params){
+        return random_number(random_letter(params.alphabet_slice), params.input_value);
     }
 }
 

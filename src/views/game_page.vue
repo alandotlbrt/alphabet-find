@@ -1,6 +1,6 @@
 <template>
     <count v-if="!count_finished"@count-completed="handleCountCompleted"/>
-    <game v-if="count_finished"/>
+    <game :params="params" v-if="count_finished"/>
 </template>
 
 <script>
@@ -18,6 +18,7 @@ export default{
     data(){
         return{
             count_finished:false,
+            params : {input_value: this.$route.query.input_value, alphabet_slice:this.$route.query.alphabet_slice}
         }
     },
     methods: {

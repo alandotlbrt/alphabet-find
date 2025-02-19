@@ -1,16 +1,14 @@
 
 export async function count_text(){
-    updateText("Ready ?")
-    await waitForMs(1000)
-    updateText("3")
-    await waitForMs(1000)
-    updateText("2")
-    await waitForMs(1000)
-    updateText("1")
-    await waitForMs(1000)
-    updateText("do your best!")
-    await waitForMs(1000)
     return 
+    updateText("Ready ?")
+    await waitForMs(500)
+    updateText("3")
+    await waitForMs(500)
+    updateText("2")
+    await waitForMs(500)
+    updateText("1")
+    await waitForMs(500)
 }
 
 

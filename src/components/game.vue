@@ -37,6 +37,9 @@
 
 
   export default {
+    props:{
+      params:Object
+    },
     data() {
       return {
         victories: 0,
@@ -57,7 +60,7 @@
         if (this.direction=="left"){
             if (input.slice(-1) != this.game_data.list[this.game_data.list.length - this.userInput.length -1 ]){
 
-              this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful } });
+              this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful,  alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value} });
             } else {
                 this.userInput = input.split('').reverse().join('');
                 this.letter_left = this.letter_left - 1
@@ -71,7 +74,7 @@
             }
         } else {
           if (input.slice(-1) != this.game_data.list[input.length-1]){
-            this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful } });
+            this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful,  alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value} });
           } else {
             this.userInput = input;
             this.letter_left = this.letter_left - 1;
@@ -85,11 +88,12 @@
         
         }   
       },
+      
       focusInput() {
           this.$refs.hiddenInput.focus();
       },
       restartGame() {
-        this.game_data = game_methods.random_game()
+        this.game_data = game_methods.random_game(this.params)
         this.userInput = "";
         this.letter_left = this.game_data.number;
         this.choosen_letter = this.game_data.letter;
@@ -103,8 +107,7 @@
       },
     },
     mounted() {
-
-        this.game_data = game_methods.random_game()
+        this.game_data = game_methods.random_game(this.params)
         this.choosen_letter = this.game_data.letter, this.direction = this.game_data.direction, this.final_string = Object.keys(this.game_data.list).reduce((acc, key) => acc + this.game_data.list[key], ''),this.letter_left = this.game_data.number, this.letter_lenght = this.final_string.length
         this.focusInput(); 
     },
