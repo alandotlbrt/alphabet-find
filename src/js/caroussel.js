@@ -134,6 +134,31 @@ export async function carousel( eleRef) {
 }
 
 
+export function random_failchat(score){
+    const sentence = [
+        'Close enough!',
+        'Oups..',
+        "Next time, you've got this!",
+        "Really.. You sure about that?..",
+        "Well, at least you tried!",
+        "Are you sure of your alphabet..?"
+    ]
+
+    if (score>10){
+        if (Math.random() < 2/3) {
+            return 'Not bad...';
+        }
+    }
+
+    if (score>20){
+        if (Math.random() < 2/3) {
+            return "Waw you're very good!";
+        }
+    }
+
+    return sentence[Math.floor(Math.random() * sentence.length)]
+}
+
 
 
 

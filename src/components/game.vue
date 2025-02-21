@@ -1,11 +1,16 @@
 <template>
+
     <header class="game-header">
-      <h1>Round : {{ victories }}</h1>
-      <h1>Letters : {{ letter_succesful }}</h1>
-      <router-link to="/">
-        <button class="red-button">Leave</button>
-      </router-link>
-    </header>
+        <span>Round: {{ victories }}</span>
+        <span>Letters: {{ letter_succesful }}</span>
+        <span >Timer: <span id="timer">{{ timer }}</span></span>
+      </header>
+      
+      <header class="timer">
+        <router-link to="/">
+          <button class="red-button">Leave</button>
+        </router-link> 
+      </header>
     <div @click="focusInput">
       <input
         ref="hiddenInput"
@@ -30,10 +35,18 @@
             </div>
         </div>
     </div>
+    <audio id="success_audio">
+      <source src="../sounds/success/correct-2.mp3" type="audio/mpeg">
+      <source src="../sounds/success/correct-2.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+  
   </template>
   
   <script>
   import game_methods from '../js/game/game'
+  import { start_timer } from "../js/game/timer.js"
+  import { stop_timer } from '../js/game/timer.js';
 
 
   export default {
@@ -42,6 +55,7 @@
     },
     data() {
       return {
+        timer: "00:00:00",
         victories: 0,
         letter_succesful:0,
         game_data: null,
@@ -59,8 +73,8 @@
         if (!this.isLetter(input.slice(-1))) {return}
         if (this.direction=="left"){
             if (input.slice(-1) != this.game_data.list[this.game_data.list.length - this.userInput.length -1 ]){
-
-              this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful,  alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value} });
+                
+              this.redirect_fail()
             } else {
                 this.userInput = input.split('').reverse().join('');
                 this.letter_left = this.letter_left - 1
@@ -69,12 +83,13 @@
                     this.victories++
                     event.target.value = ""
                     this.restartGame()
+                  
                 }
 
             }
         } else {
           if (input.slice(-1) != this.game_data.list[input.length-1]){
-            this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful,  alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value} });
+            this.redirect_fail()
           } else {
             this.userInput = input;
             this.letter_left = this.letter_left - 1;
@@ -88,11 +103,32 @@
         
         }   
       },
+      get_timer_score(){
+        const timer = document.getElementById('timer')
+        return timer.innerText
+      },
+      redirect_fail(){
+        stop_timer()
+        this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful, timer: this.get_timer_score() ,alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value} });
       
+      },
+      playsound(){
+         var x = document.getElementById('success_audio');
+            if (!x.paused) {
+                x.pause();
+                x.currentTime = 0;
+            }
+
+            x.play().catch(function(error) {
+                console.error('Erreur de lecture du son:', error);
+            });
+      },
+    
       focusInput() {
           this.$refs.hiddenInput.focus();
       },
       restartGame() {
+        this.playsound()
         this.game_data = game_methods.random_game(this.params)
         this.userInput = "";
         this.letter_left = this.game_data.number;
@@ -105,8 +141,10 @@
       isLetter(str) {
         return str.length === 1 && str.match(/[a-z]/i);
       },
+  
     },
     mounted() {
+        start_timer()
         this.game_data = game_methods.random_game(this.params)
         this.choosen_letter = this.game_data.letter, this.direction = this.game_data.direction, this.final_string = Object.keys(this.game_data.list).reduce((acc, key) => acc + this.game_data.list[key], ''),this.letter_left = this.game_data.number, this.letter_lenght = this.final_string.length
         this.focusInput(); 

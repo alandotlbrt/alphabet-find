@@ -10,7 +10,8 @@ function random_letter(alphabet_slice){
         return random_letter(alphabet_slice)
     }
 }
-function random_number(letter, input_value_max = 25) {
+function random_number(letter, input_value_max = 24) {
+    input_value_max++
     let index_before = 0;
     let index_after = 0;
 
@@ -25,7 +26,6 @@ function random_number(letter, input_value_max = 25) {
             index_after = Math.ceil(Math.random() * (alphabet.length - letter.index - 1));
         } while (index_after >= input_value_max);
     }
-    
 
     if (index_before > 0 && index_after > 0) {
         return Math.random() < 0.5
@@ -37,6 +37,7 @@ function random_number(letter, input_value_max = 25) {
         return { list: alphabet.slice(letter.index + 1, letter.index + index_after + 1), direction: "right", number: index_after, letter: letter.letter };
     }
 }
+
 const game_methods = {
 
     random_game:function(params){

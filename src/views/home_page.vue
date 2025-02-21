@@ -3,11 +3,10 @@
     <header class="settings-header">
       <div class="horizontal">
         <span>Max range:</span>
-        <input type="range" min="1" max="25" step="1" v-model="input_value">   
-        <h3>{{input_value}}</h3>
+        <span id="input_value"class="input_value">{{ input_value }}</span>
+        <input class="range_max"type="range" min="1" max="25" step="1" v-model="input_value">   
         <span>Start by:</span>
         <div class="letter-click">
-
           <a @click="change_state($event)"class="clicable clicked">a</a>
           <a @click="change_state($event)"class="clicable clicked">b</a>
           <a @click="change_state($event)"class="clicable clicked">c</a>
@@ -43,23 +42,30 @@
 
     <div class="title">
         <h1><span class="title-text" id="carousel">A<span style="color: #4D764B;">l</span>p<span style="color: #744b76;">h</span>a<span style="color: #4D764B;">b</span>e<span style="color: #cc334c;">t</span>.</span><span class="input-cursor"></span></h1>
-        <button @click="redirectionToPlay">Jouer</button>
-    </div>
+        <button @click="redirectionToPlay">Play</button>
+        <span v-if="error_show" class="error">please select at least one letter</span>
+      </div>
+      
+  
+      
 </template>
 
 
 
 <script>
 import { carousel } from '../js/caroussel.js';
+
+
 export default{
-  mounted(){
+  mounted(){  
       carousel("#carousel");   
-      
+
   },
   data(){
     return{
       alphabet_slice: 'abcdefghijklmnopqrstuvwxyz'.split(''),
-      input_value: 25
+      input_value: 25,
+      error_show: false,
     }
   },
   methods:{
@@ -69,6 +75,7 @@ export default{
         event.target.classList.remove('clicked');
         this.alphabet_slice = this.alphabet_slice.filter(l => l !== letter);
       } else {
+        this.error_show = false
         event.target.classList.add('clicked');
         this.alphabet_slice.push(letter);
       }
@@ -81,6 +88,7 @@ export default{
       });
     },
     activeAllClicked() {
+   
       const clickables = document.querySelectorAll('.clicable');
       clickables.forEach(element => {
         if (!element.classList.contains('red') && !element.classList.contains('green')) {
@@ -91,8 +99,15 @@ export default{
       });
     },
     redirectionToPlay(){
-      this.$router.push({ name: 'game', query: { alphabet_slice: this.alphabet_slice , input_value : this.input_value } });
-    }
+      const clickables = document.querySelectorAll('.clicked');
+
+      if (clickables.length > 0){
+        this.$router.push({ name: 'game', query: { alphabet_slice: this.alphabet_slice , input_value : this.input_value } });
+      } else {
+        this.error_show = true
+      }
+    },
+
   }
 }
 
@@ -185,7 +200,17 @@ export default{
     display: flex;
     gap: 7px;
   }
+  .range_max{
+    cursor: pointer;
+  }
+  .input_value{
+    font-weight: 1000;
+  }
 
+  .error{
+    margin-top: -30px;
+    color: #cc334c;
+  }
 
 
 
