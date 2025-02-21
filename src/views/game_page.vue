@@ -18,7 +18,7 @@ export default{
     data(){
         return{
             count_finished:false,
-            params : {input_value: this.$route.query.input_value, alphabet_slice:this.$route.query.alphabet_slice}
+            params : {input_value: this.$route.query.input_value, alphabet_slice:this.$route.query.alphabet_slice, muted: this.$route.query.muted}
         }
     },
     methods: {

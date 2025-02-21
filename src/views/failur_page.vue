@@ -36,7 +36,7 @@ export default{
             failchat : random_failchat(this.$route.query.score),
             letter_succesful: null,
             timer: this.$route.query.timer,
-            params : {input_value: this.$route.query.input_value, alphabet_slice:this.$route.query.alphabet_slice}
+            params : {input_value: this.$route.query.input_value, alphabet_slice:this.$route.query.alphabet_slice, muted: this.$route.query.muted}
         };
     },
     created() {
@@ -46,14 +46,17 @@ export default{
     },
     methods:{
         redirectionToPlay(){
-            console.log(this.params.alphabet_slice)
             this.$router.push({ name: 'game', query: { alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value } });
         },
         playsound(){
+            console.log(this.params.muted)
+            if(this.params.muted){return}
             var x = document.getElementById('fail_audio');
+
             if (!x.paused) {
                 x.pause();
                 x.currentTime = 0;
+                
             }
 
             x.play().catch(function(error) {
