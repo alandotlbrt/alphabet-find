@@ -113,8 +113,7 @@
       
       },
       playsound(){
-
-        if(this.params.muted){return}
+        if(localStorage.getItem('muted') == true){return}
          var x = document.getElementById('success_audio');
             if (!x.paused) {
                 x.pause();
@@ -146,7 +145,6 @@
   
     },
     mounted() {
-        console.log(localStorage.getItem("timer"));
         start_timer()
         this.game_data = game_methods.random_game(this.params)
         this.choosen_letter = this.game_data.letter, this.direction = this.game_data.direction, this.final_string = Object.keys(this.game_data.list).reduce((acc, key) => acc + this.game_data.list[key], ''),this.letter_left = this.game_data.number, this.letter_lenght = this.final_string.length

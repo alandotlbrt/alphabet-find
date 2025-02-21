@@ -49,8 +49,7 @@ export default{
             this.$router.push({ name: 'game', query: { alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value } });
         },
         playsound(){
-            console.log(this.params.muted)
-            if(this.params.muted){return}
+            if(localStorage.getItem('muted') == true){return}
             var x = document.getElementById('fail_audio');
 
             if (!x.paused) {

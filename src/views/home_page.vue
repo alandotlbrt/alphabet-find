@@ -4,35 +4,35 @@
       <div class="horizontal">
         <span>Max range:</span>
         <span id="input_value"class="input_value">{{ input_value }}</span>
-        <input class="range_max"type="range" min="1" max="25" step="1" v-model="input_value">   
+        <input class="range_max"type="range" min="1" max="25" step="1" v-model="input_value" @input="changeLocalValue">   
         <span>Start by:</span>
         <div class="letter-click">
-          <a @click="change_state($event)"class="clicable clicked">a</a>
-          <a @click="change_state($event)"class="clicable clicked">b</a>
-          <a @click="change_state($event)"class="clicable clicked">c</a>
-          <a @click="change_state($event)"class="clicable clicked">d</a>
-          <a @click="change_state($event)"class="clicable clicked">e</a>
-          <a @click="change_state($event)"class="clicable clicked">f</a>
-          <a @click="change_state($event)"class="clicable clicked">g</a>
-          <a @click="change_state($event)"class="clicable clicked">h</a>
-          <a @click="change_state($event)"class="clicable clicked">i</a>
-          <a @click="change_state($event)"class="clicable clicked">j</a>
-          <a @click="change_state($event)"class="clicable clicked">k</a>
-          <a @click="change_state($event)"class="clicable clicked">l</a>
-          <a @click="change_state($event)"class="clicable clicked">m</a>
-          <a @click="change_state($event)"class="clicable clicked">n</a>
-          <a @click="change_state($event)"class="clicable clicked">o</a>
-          <a @click="change_state($event)"class="clicable clicked">p</a>
-          <a @click="change_state($event)"class="clicable clicked">q</a>
-          <a @click="change_state($event)"class="clicable clicked">r</a>
-          <a @click="change_state($event)"class="clicable clicked">s</a>
-          <a @click="change_state($event)"class="clicable clicked">t</a>
-          <a @click="change_state($event)"class="clicable clicked">u</a>
-          <a @click="change_state($event)"class="clicable clicked">v</a>
-          <a @click="change_state($event)"class="clicable clicked">w</a>
-          <a @click="change_state($event)"class="clicable clicked">x</a>
-          <a @click="change_state($event)"class="clicable clicked">y</a>
-          <a @click="change_state($event)"class="clicable clicked">z</a>
+          <a @click="change_state($event)"class="clicable letter">a</a>
+          <a @click="change_state($event)"class="clicable letter">b</a>
+          <a @click="change_state($event)"class="clicable letter">c</a>
+          <a @click="change_state($event)"class="clicable letter ">d</a>
+          <a @click="change_state($event)"class="clicable letter">e</a>
+          <a @click="change_state($event)"class="clicable letter">f</a>
+          <a @click="change_state($event)"class="clicable letter">g</a>
+          <a @click="change_state($event)"class="clicable letter">h</a>
+          <a @click="change_state($event)"class="clicable letter">i</a>
+          <a @click="change_state($event)"class="clicable letter">j</a>
+          <a @click="change_state($event)"class="clicable letter">k</a>
+          <a @click="change_state($event)"class="clicable letter">l</a>
+          <a @click="change_state($event)"class="clicable letter">m</a>
+          <a @click="change_state($event)"class="clicable letter">n</a>
+          <a @click="change_state($event)"class="clicable letter">o</a>
+          <a @click="change_state($event)"class="clicable letter">p</a>
+          <a @click="change_state($event)"class="clicable letter">q</a>
+          <a @click="change_state($event)"class="clicable letter">r</a>
+          <a @click="change_state($event)"class="clicable letter">s</a>
+          <a @click="change_state($event)"class="clicable letter">t</a>
+          <a @click="change_state($event)"class="clicable letter">u</a>
+          <a @click="change_state($event)"class="clicable letter">v</a>
+          <a @click="change_state($event)"class="clicable letter">w</a>
+          <a @click="change_state($event)"class="clicable letter">x</a>
+          <a @click="change_state($event)"class="clicable letter">y</a>
+          <a @click="change_state($event)"class="clicable letter">z</a>
           <a @click="removeAllClicked"class="clicable red">off</a>
           <a @click="activeAllClicked"class="clicable green">on</a>
         </div>
@@ -40,10 +40,10 @@
       </div>
       <div class="horizontal">
         <span>Timer per round : </span>
-        <a @click="change_timer($event)" class="clicable clicked time"> none </a>
-        <a @click="change_timer($event)" class="clicable time"> 5s </a>
-        <a @click="change_timer($event)" class="clicable time"> 10s </a>
-        <a @click="change_timer($event)" class="clicable time"> 15s </a>
+        <a @click="change_timer($event)" class="clicable time">none</a>
+        <a @click="change_timer($event)" class="clicable time">5s</a>
+        <a @click="change_timer($event)" class="clicable time">10s</a>
+        <a @click="change_timer($event)" class="clicable time">15s</a>
       </div>
     </header>
     <div class="title">
@@ -64,21 +64,38 @@ import { carousel } from '../js/caroussel.js';
 
 export default{
   mounted(){  
-      carousel("#carousel");   
-      const cat = localStorage.getItem("myCat");
-      localStorage.setItem("myCat", "Tom");
-      
+      carousel("#carousel");    
+      this.active_home()
+
   },
   data(){
     return{
-      alphabet_slice: 'abcdefghijklmnopqrstuvwxyz'.split(''),
-      input_value: 25,
+      alphabet_slice: localStorage.getItem("alphabet") ? localStorage.getItem("alphabet").split('') : 'abcdefghijklmnopqrstuvwxyz'.split(''),
+      input_value: localStorage.getItem('input_value') ? localStorage.getItem('input_value') : 25,
       error_show: false,
-      muted: false,
-      timer:0,
+      muted: localStorage.getItem('muted') === 'false' ? false : true,
+      timer: localStorage.getItem('timer') ? localStorage.getItem('timer') : "none",
     }
   },
   methods:{
+
+    active_home(){
+      const clickables = document.querySelectorAll('.letter');
+      clickables.forEach(element=>{
+        if (this.alphabet_slice.includes(element.textContent)){
+          element.classList.add('clicked')
+        }
+      });
+
+      const timers = document.querySelectorAll('.time');
+      timers.forEach(element=>{
+
+        if (element.textContent ==  this.timer){
+          element.classList.add('clicked')
+        }
+      })
+    },
+
     change_state(event) {
       const letter = event.target.textContent;
       if (event.target.classList.contains('clicked')) {
@@ -89,45 +106,57 @@ export default{
         event.target.classList.add('clicked');
         this.alphabet_slice.push(letter);
       }
+      localStorage.setItem('alphabet', this.alphabet_slice)
     },
+
     change_timer(event){
-      const timer = event.target.textContent;
       const clickables = document.querySelectorAll('.time');
       clickables.forEach(element => {
         element.classList.remove('clicked');
       })
       event.target.classList.add('clicked');
-      this.timer = timer.slice(0,-2)
+      this.timer = event.target.textContent;
       localStorage.setItem("timer", this.timer)
     },
+
     removeAllClicked() {
       const clickables = document.querySelectorAll('.clicable');
       clickables.forEach(element => {
         element.classList.remove('clicked');
         this.alphabet_slice = this.alphabet_slice.filter(l => l !== element.textContent);
       });
+      localStorage.setItem('alphabet', this.alphabet_slice)
     },
+
     activeAllClicked() {
-  
       const clickables = document.querySelectorAll('.clicable');
       clickables.forEach(element => {
         if (!element.classList.contains('red') && !element.classList.contains('green')) {
           element.classList.add('clicked');
           this.alphabet_slice.push(element.textContent);
-      
         }
       });
+      localStorage.setItem('alphabet', this.alphabet_slice)
     },
+
+    changeLocalValue(){
+      localStorage.setItem('input_value', this.input_value)
+    },
+
     redirectionToPlay(){
       const clickables = document.querySelectorAll('.clicked');
       if (clickables.length > 0){
-        this.$router.push({ name: 'game', query: { alphabet_slice: this.alphabet_slice , input_value : this.input_value, muted : this.muted } });
+        this.$router.push({ name: 'game', query: { alphabet_slice: this.alphabet_slice , input_value : this.input_value} });
       } else {
         this.error_show = true
       }
     },
+
     toggleMuted(){
-      this.muted = !this.muted
+      this.muted = !this.muted;
+      localStorage.setItem('muted', this.muted)
+  
+
     }
 
   }
