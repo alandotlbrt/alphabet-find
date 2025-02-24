@@ -3,6 +3,11 @@ import './assets/cursor.css'
 import './assets/game.css'
 import './assets/home.css'
 import './assets/failur.css'
+import './js/caroussel.js';
+import './js/game/count';
+import './js/game/timer';
+import './js/game/game';
+import './js/sound.js'
 import { createApp } from 'vue'
 import App from './App.vue'
 import home from './views/home_page.vue'

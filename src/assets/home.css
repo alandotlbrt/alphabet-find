@@ -4,10 +4,13 @@
     justify-content: center;
     align-items: center;
     height: 75px;
-    width: 100vw;
     margin-top: 1.5rem;
-    padding: 1vh;
+    padding: 1.5vh;
     gap: 2vh;
+}
+
+.horizontal.header{
+    gap: 1vw;
 }
 
 
@@ -54,7 +57,7 @@
 }
 
 .settings-header .horizontal {
-    gap: 10px;
+    gap: 0.5vw;
 }
 
 .clicable {
