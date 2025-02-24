@@ -33,7 +33,7 @@ export default{
     data() {
         return {
             score: null,
-            failchat : random_failchat(this.$route.query.score),
+            failchat : random_failchat(this.$route.query.score, this.$route.query.fail_message),
             letter_succesful: null,
             timer: this.$route.query.timer,
             params : {input_value: this.$route.query.input_value, alphabet_slice:this.$route.query.alphabet_slice, muted: this.$route.query.muted}
@@ -50,7 +50,6 @@ export default{
         },
         playsound(){
             if(localStorage.getItem('muted') == "true") {return}
-            console.log("caca")
             var x = document.getElementById('fail_audio');
 
             if (!x.paused) {

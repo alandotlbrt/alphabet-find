@@ -19,6 +19,7 @@
         @input="handleInput"
         :maxlength=letter_lenght
       />
+   
         <div class="text-typing-div" @click="focusInput">
             <div class="vertical">
                 <div class="horizontal input-gap-right" v-if="direction=='left'">
@@ -35,6 +36,7 @@
             </div>
         </div>
     </div>
+    <h1 v-if="cooldown != 'none' && cooldown != null" id="cooldown"> Cooldown : {{ remainingSeconds }} </h1>
     <audio id="success_audio">
       <source src="../sounds/success/correct-2.mp3" type="audio/mpeg">
       <source src="../sounds/success/correct-2.ogg" type="audio/ogg">
@@ -46,7 +48,7 @@
   <script>
   import game_methods from '../js/game/game'
   import { start_timer } from "../js/game/timer.js"
-  import { stop_timer } from '../js/game/timer.js';
+  import { stop_timer } from '../js/game/timer.js'
 
 
   export default {
@@ -55,6 +57,7 @@
     },
     data() {
       return {
+        cooldown: localStorage.getItem('cooldown'),
         timer: "00:00:00",
         victories: 0,
         letter_succesful:0,
@@ -65,6 +68,8 @@
         letter_left: 0,
         direction:"",
         letter_lenght:0,
+        currentIntervalId: null,
+        remainingSeconds:null,
       };
     },
     methods: {
@@ -83,9 +88,8 @@
                     this.victories++
                     event.target.value = ""
                     this.restartGame()
-                  
-                }
 
+                }
             }
         } else {
           if (input.slice(-1) != this.game_data.list[input.length-1]){
@@ -107,20 +111,19 @@
         const timer = document.getElementById('timer')
         return timer.innerText
       },
-      redirect_fail(){
+      redirect_fail(fail_message=""){
+        this.stop_cooldown()
         stop_timer()
-        this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful, timer: this.get_timer_score() ,alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value, muted : this.params.muted} });
+        this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful, timer: this.get_timer_score() ,alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value, fail_message:fail_message } });
       
       },
       playsound(){
-
         if(localStorage.getItem('muted') == "true") {return}
          var x = document.getElementById('success_audio');
             if (!x.paused) {
                 x.pause();
                 x.currentTime = 0;
             }
-
             x.play().catch(function(error) {
                 console.error('Erreur de lecture du son:', error);
             });
@@ -130,6 +133,7 @@
           this.$refs.hiddenInput.focus();
       },
       restartGame() {
+        this.startCountdown()
         this.playsound()
         this.game_data = game_methods.random_game(this.params)
         this.userInput = "";
@@ -140,13 +144,46 @@
         this.letter_lenght = this.final_string.length;
         this.focusInput();
       },
+
       isLetter(str) {
         return str.length === 1 && str.match(/[a-z]/i);
       },
-  
+      
+      startCountdown() {
+
+        if (this.cooldown == "none" && this.cooldown == null){ return }
+
+        let seconds = this.cooldown.slice(0,-1)
+
+        if (seconds < 0 || seconds > 15) {
+            return;
+        }
+
+        if (this.currentIntervalId !== null) {
+        clearInterval(this.currentIntervalId);
+    }
+        this.remainingSeconds = seconds;
+        this.currentIntervalId = setInterval(() => {
+          if (this.remainingSeconds == 1) {
+              clearInterval(this.currentIntervalId);
+              this.currentIntervalId = null;
+              this.redirect_fail("time")
+          } else {
+              this.remainingSeconds--;
+         }
+        }, 1000);
+      },
+
+      stop_cooldown(){
+        if (this.currentIntervalId !== null) {
+          clearInterval(this.currentIntervalId);
+          this.currentIntervalId = null;
+        }
+      }
     },
     mounted() {
         start_timer()
+        this.startCountdown()
         this.game_data = game_methods.random_game(this.params)
         this.choosen_letter = this.game_data.letter, this.direction = this.game_data.direction, this.final_string = Object.keys(this.game_data.list).reduce((acc, key) => acc + this.game_data.list[key], ''),this.letter_left = this.game_data.number, this.letter_lenght = this.final_string.length
         this.focusInput(); 

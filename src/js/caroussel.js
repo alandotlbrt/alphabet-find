@@ -134,7 +134,7 @@ export async function carousel( eleRef) {
 }
 
 
-export function random_failchat(score){
+export function random_failchat(score, fail_message=""){
     const sentence = [
         'Close enough!',
         'Oups..',
@@ -143,6 +143,12 @@ export function random_failchat(score){
         "Well, at least you tried!",
         "Are you sure of your alphabet..?"
     ]
+
+    if (fail_message == "time"){
+        if (Math.random() < 1/3) {
+            return 'Not fast enough..' ||" You have to be fast !.."
+        }
+    }
 
     if (score>10){
         if (Math.random() < 2/3) {

@@ -3,15 +3,16 @@ let startTime;
 let elapsedTime = 0;
 
 export function start_timer() {
-
+  
   if (timerInterval) {
     clearInterval(timerInterval);
   }
 
   startTime = new Date().getTime() - elapsedTime;
 
-
   timerInterval = setInterval(updateTimer, 1000);
+
+
 }
 
 export function stop_timer() {
@@ -20,10 +21,10 @@ export function stop_timer() {
     clearInterval(timerInterval);
     timerInterval = null;
 
-
-    const currentTime = new Date().getTime();
-    elapsedTime = currentTime - startTime;
+    startTime = new Date().getTime();
+    elapsedTime = 0;
   }
+  
 }
 
 function updateTimer() {
@@ -37,10 +38,10 @@ function updateTimer() {
 
   const formattedTime = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 
-
   document.getElementById('timer').innerText = formattedTime;
 }
 
 function pad(number) {
   return number < 10 ? '0' + number : number;
 }
+  
