@@ -67,29 +67,34 @@ export default{
       carousel("#carousel");    
       this.active_home()
 
+
   },
   data(){
     return{
-      alphabet_slice: localStorage.getItem("alphabet") ? localStorage.getItem("alphabet").split('') : 'abcdefghijklmnopqrstuvwxyz'.split(''),
+      alphabet_slice: localStorage.getItem("alphabet") ? localStorage.getItem("alphabet").split(',') : 'abcdefghijklmnopqrstuvwxyz'.split(''),
       input_value: localStorage.getItem('input_value') ? localStorage.getItem('input_value') : 25,
       error_show: false,
-      muted: localStorage.getItem('muted') === 'false' ? false : true,
+      muted: localStorage.getItem('muted') === 'false' ? false : this.muted_value_stored(),
       timer: localStorage.getItem('timer') ? localStorage.getItem('timer') : "none",
     }
   },
   methods:{
 
+    muted_value_stored(){
+      localStorage.setItem('muted', true)
+      return true
+    },
+
     active_home(){
+
       const clickables = document.querySelectorAll('.letter');
       clickables.forEach(element=>{
         if (this.alphabet_slice.includes(element.textContent)){
           element.classList.add('clicked')
         }
       });
-
       const timers = document.querySelectorAll('.time');
       timers.forEach(element=>{
-
         if (element.textContent ==  this.timer){
           element.classList.add('clicked')
         }
@@ -101,6 +106,7 @@ export default{
       if (event.target.classList.contains('clicked')) {
         event.target.classList.remove('clicked');
         this.alphabet_slice = this.alphabet_slice.filter(l => l !== letter);
+
       } else {
         this.error_show = false
         event.target.classList.add('clicked');
@@ -122,16 +128,19 @@ export default{
     removeAllClicked() {
       const clickables = document.querySelectorAll('.clicable');
       clickables.forEach(element => {
-        element.classList.remove('clicked');
-        this.alphabet_slice = this.alphabet_slice.filter(l => l !== element.textContent);
+        if (!element.classList.contains('time')){
+          element.classList.remove('clicked');
+          this.alphabet_slice = this.alphabet_slice.filter(l => l !== element.textContent);
+        }
+
       });
-      localStorage.setItem('alphabet', this.alphabet_slice)
+      console.log(localStorage.getItem('alphabet'))
     },
 
     activeAllClicked() {
       const clickables = document.querySelectorAll('.clicable');
       clickables.forEach(element => {
-        if (!element.classList.contains('red') && !element.classList.contains('green')) {
+        if (!element.classList.contains('red') && !element.classList.contains('green') && !element.classList.contains('time')) {
           element.classList.add('clicked');
           this.alphabet_slice.push(element.textContent);
         }
@@ -145,7 +154,8 @@ export default{
 
     redirectionToPlay(){
       const clickables = document.querySelectorAll('.clicked');
-      if (clickables.length > 0){
+      if (clickables.length > 0 && Array.from(clickables).some(el => el.classList.contains('letter'))){
+        localStorage.setItem('muted', this.muted)
         this.$router.push({ name: 'game', query: { alphabet_slice: this.alphabet_slice , input_value : this.input_value} });
       } else {
         this.error_show = true

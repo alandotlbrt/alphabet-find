@@ -113,7 +113,8 @@
       
       },
       playsound(){
-        if(localStorage.getItem('muted') == true){return}
+
+        if(localStorage.getItem('muted') == "true") {return}
          var x = document.getElementById('success_audio');
             if (!x.paused) {
                 x.pause();
