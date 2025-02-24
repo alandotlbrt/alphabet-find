@@ -63,7 +63,7 @@ async function typeWithCenterLetter(config, eleRef, delay = 250) {
 
     const addLetterWithAnimation = async (char, position) => {
         const span = placeholders[position];
-
+        
         await waitForMs(100);
         span.textContent = char;
         span.style.color = "#4D764B"; 

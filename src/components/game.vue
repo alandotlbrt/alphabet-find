@@ -7,9 +7,9 @@
       </header>
       
       <header class="timer">
-        <router-link to="/">
-          <button class="red-button">Leave</button>
-        </router-link> 
+
+          <button @click="redirect_home" class="red-button">Leave</button>
+        <p v-if="cooldown != 'none' && cooldown != null" id="cooldown"> {{ remainingSeconds }}s left </p>
       </header>
     <div @click="focusInput">
       <input
@@ -36,7 +36,13 @@
             </div>
         </div>
     </div>
-    <h1 v-if="cooldown != 'none' && cooldown != null" id="cooldown"> Cooldown : {{ remainingSeconds }} </h1>
+    
+    <audio id="tic-tac">
+      <source src="../sounds/tic-tac/tic-tac.mp3" type="audio/mpeg">
+      <source src="../sounds/tic-tac/tic-tac.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
     <audio id="success_audio">
       <source src="../sounds/success/correct-2.mp3" type="audio/mpeg">
       <source src="../sounds/success/correct-2.ogg" type="audio/ogg">
@@ -109,7 +115,9 @@
       },
       get_timer_score(){
         const timer = document.getElementById('timer')
-        return timer.innerText
+        if (timer){
+          return timer.innerText
+        }
       },
       redirect_fail(fail_message=""){
         this.stop_cooldown()
@@ -117,9 +125,9 @@
         this.$router.push({ name: 'failur', query: { score: this.victories, letter_score : this.letter_succesful, timer: this.get_timer_score() ,alphabet_slice: this.params.alphabet_slice , input_value : this.params.input_value, fail_message:fail_message } });
       
       },
-      playsound(){
+      playsound(id){
         if(localStorage.getItem('muted') == "true") {return}
-         var x = document.getElementById('success_audio');
+         var x = document.getElementById(id);
             if (!x.paused) {
                 x.pause();
                 x.currentTime = 0;
@@ -134,7 +142,7 @@
       },
       restartGame() {
         this.startCountdown()
-        this.playsound()
+        this.playsound('success_audio')
         this.game_data = game_methods.random_game(this.params)
         this.userInput = "";
         this.letter_left = this.game_data.number;
@@ -164,11 +172,15 @@
     }
         this.remainingSeconds = seconds;
         this.currentIntervalId = setInterval(() => {
+         
           if (this.remainingSeconds == 1) {
               clearInterval(this.currentIntervalId);
               this.currentIntervalId = null;
               this.redirect_fail("time")
           } else {
+              if(this.remainingSeconds<=4){
+                this.playsound('tic-tac')
+              }
               this.remainingSeconds--;
          }
         }, 1000);
@@ -179,7 +191,12 @@
           clearInterval(this.currentIntervalId);
           this.currentIntervalId = null;
         }
-      }
+      },
+      redirect_home(){
+        this.stop_cooldown()
+        stop_timer()
+        this.$router.push('/')
+      },
     },
     mounted() {
         start_timer()

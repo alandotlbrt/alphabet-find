@@ -145,7 +145,7 @@ export default{
 }
 .score-div{
     
-    color: white;
+    color: grey;
     display: flex;
     gap: 10px;
     font-size: 3vh;
