@@ -165,11 +165,3 @@ export function random_failchat(score, fail_message=""){
     return sentence[Math.floor(Math.random() * sentence.length)]
 }
 
-
-
-
-/*
-function updateFontColor(eleRef, color) {
-    const element = document.querySelector(eleRef);
-    element.style.color = color; 
-} */

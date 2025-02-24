@@ -11,9 +11,6 @@
     
   }
 
-
-
-
   .timer{
     gap: 10px;
     display: flex;
@@ -65,3 +62,8 @@
   .choosen-letter {
     color: #744b76;
   }
+
+
+
+/*   RESPONSIVE  */
+
