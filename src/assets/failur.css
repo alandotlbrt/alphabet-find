@@ -1,0 +1,78 @@
+
+.loose-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    margin-top: 75px;
+    font-size: 200px;
+}
+
+.loose-header h3{
+    font-size: 120px;
+    color:#cc334c;
+}
+
+.lost-game{
+    width: 100vw;
+}
+
+.red-score{
+    color: #cc334c;
+}
+
+.lost-game h1{
+    font-weight: 650;
+    font-size: 75px;
+    margin-bottom: 15px;
+    margin-top: 0.7vh;
+
+}
+
+.span-score{
+    color:#4D764B; 
+}
+
+.retry{
+    color: rgb(218, 218, 218);
+    font-size: 2vh;
+    font-style: italic;
+    margin-bottom: -3px;
+    margin-left: 10px;
+    
+}
+
+.lost-game h2{
+    font-size: 50px;    
+    font-weight:560;
+    color: rgb(172, 172, 172);
+}
+
+.lost-game h3{
+    color: #cc334c;
+}
+
+.lost-game button{
+    margin-top: 0.5vh;
+}
+
+
+.button-gap{
+    gap: 10px;
+}
+
+.lost-game button.no{
+    background-color: #cc334c;
+}
+
+.replay-button{
+    background-color: #4D764B;
+}
+.score-div{
+
+    color: grey;
+    display: flex;
+    gap: 10px;
+    font-size: 3vh;
+    margin-bottom: -1vh;
+}

@@ -30,9 +30,11 @@
                     <div class="word"> <span class="choosen-letter">{{ choosen_letter }}</span><span class="user-input">{{ userInput }}</span></div>
                     <span class="input-cursor"></span>
                 </div>
-                <h1 v-if="direction=='left'"><-</h1>
-                <h1 v-else>-></h1>
-                <h1>{{ letter_left }}</h1>
+                <div class="indication">
+                  <h1 v-if="direction=='left'"><--</h1>
+                  <h1 v-else>--></h1>
+                  <h1>{{ letter_left }}</h1>
+                </div>
             </div>
         </div>
     </div>
