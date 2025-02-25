@@ -47,7 +47,7 @@ button{
 
 h1,h2,h3{
     margin: 0px;
-    color: white;
+    color: rgb(146, 0, 0);
     font-size: calc(var(--font-size-base) * 2);
 }
 
