@@ -12,19 +12,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     padding: 1.5vh;
-    gap: 15px;
+    gap: 1rem;
 }
 
 .horizontal.header{
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .horizontal.letter{
     display: flex;
-    gap: 10px;
+    gap: 1rem;
 }
 
 .horizontal.settings{
@@ -45,11 +45,10 @@
 }
 
 
-
 .title {
     gap: 1rem;
     width: 90vw;
-    margin: 25vmin;
+    margin: 22vmin;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -134,7 +133,7 @@
 .letter-click {
     display: flex;
     flex-wrap:wrap;
-    gap: 7px;
+    gap: 5px;
     justify-content: center;
 }
 

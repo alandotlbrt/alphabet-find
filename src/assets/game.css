@@ -1,16 +1,25 @@
+  .game-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
   .game-header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 75px;
-    gap: 1.4vw;
-    font-size: 1.8vw;
+    gap: 2vw;
+    font-size: 25px;
     color: white;
     letter-spacing: 1px;
+    margin-top: 1.5rem;
     
   }
 
   .timer{
+    margin: 10px;
     gap: 10px;
     display: flex;
     align-items: center;
@@ -26,17 +35,26 @@
     font-size: 20px;
   }
 
+
+  .text-typing-div {
+    margin: 22vmin;
+    color: white;
+    font-size: 11vh;
+    font-weight: bold;
+    word-break: break-word; 
+    overflow-wrap: break-word;
+    display: inline-block;
+    max-width: 100%; 
+  }
+
+  .vertical.typing{
+    align-items: center;
+    justify-content: center;
+  }
+
+
   .red-button{
     background-color: #cc334c;
-  }
-
-
-  .input-gap-left{
-    margin-left: 12px;
-  }
-
-  .input-gap-right{
-    margin-right: 12px;
   }
 
   .hidden-input {
@@ -45,18 +63,6 @@
     opacity: 0;
   }
 
-
-  .text-typing-div {
-    color: white;
-    font-size: 7vw;
-    font-weight: bold;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-  }
 
   .choosen-letter {
     color: #744b76;
@@ -77,3 +83,9 @@
 
 /*   RESPONSIVE  */
 
+
+@media screen and (max-width:426px) {
+    .game-header {
+      flex-direction: column;
+    }
+}

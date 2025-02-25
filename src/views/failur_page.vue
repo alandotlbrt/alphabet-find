@@ -1,7 +1,6 @@
 <template>
-    <!-- <header class="loose-header">
-        <h3>game over</h3>
-    </header> -->
+    
+    
     <div class="center lost-game">  
         <div class="score-div">
             <span>Score: <span>{{ score }}</span></span>|
