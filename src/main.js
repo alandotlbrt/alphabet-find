@@ -14,15 +14,10 @@ import home from './views/home_page.vue'
 import game from './views/game_page.vue'
 import router from './router'
 
-
-
-
 const app = createApp(App)
-
 
 app.component('home_page', home)
 app.component('game_page', game)
-
 
 app.config.devtools = false
 app.config.productionTip = false
@@ -33,6 +28,5 @@ if (typeof window !== 'undefined') {
 
 app.use(router)
 app.mount('#app')
-
 
 export default app

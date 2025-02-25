@@ -5,9 +5,8 @@
         <span>Letters: {{ letter_succesful }}</span>
         <span >Timer: <span id="timer">{{ timer }}</span></span>
       </header>
-      
+    
       <header class="timer">
-
           <button @click="redirect_home" class="red-button">Leave</button>
         <p v-if="cooldown != 'none' && cooldown != null" id="cooldown"> {{ remainingSeconds }}s left </p>
       </header>

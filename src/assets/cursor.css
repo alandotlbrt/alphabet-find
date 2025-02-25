@@ -23,8 +23,7 @@
 .input-cursor {
     display: inline-block;
     width: 2px;
-    height: 7vh;
+    height:9vh;
     background-color: white;
-    margin-left: 8px;
-    margin-right: 8px;
+
 }

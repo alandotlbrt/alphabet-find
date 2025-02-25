@@ -1,36 +1,73 @@
+
+.homepage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .settings-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 75px;
     margin-top: 1.5rem;
     padding: 1.5vh;
-    gap: 2vh;
+    gap: 15px;
 }
 
 .horizontal.header{
-    gap: 1vw;
+    display: flex;
+    gap: 10px;
 }
+
+.horizontal.letter{
+    display: flex;
+    gap: 10px;
+}
+
+.horizontal.settings{
+    gap: 5px;
+}
+.horizontal.range-bar {
+    display: flex;
+    gap: 10px;
+}
+
+.horizontal.cooldown{
+    display: flex;
+    gap: 10px;
+}
+
+.horizontal.cooldown_choice{
+    gap: 5px;
+}
+
 
 
 .title {
-    gap: 5vh;
+    gap: 1rem;
+    width: 90vw;
+    margin: 25vmin;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
-.title-text {
+}
+  
+.title h1{
     animation: slideFadeIn 0.2s ease-out forwards;
     transition: color 0.3s linear;
-    font-size: 7vw;
-    margin-left: 22px;
+    font-size: 11vh;
+    word-break: break-word; 
+    overflow-wrap: break-word;
+    display: inline-block;
+    max-width: 100%; 
+    margin-left: 12px;
 }
+
 
 .placeholder {
     letter-spacing: 8px;
@@ -56,9 +93,7 @@
     color: white;
 }
 
-.settings-header .horizontal {
-    gap: 0.5vw;
-}
+
 
 .clicable {
     color: grey;
@@ -98,8 +133,9 @@
 
 .letter-click {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     gap: 7px;
+    justify-content: center;
 }
 
 .range_max {
@@ -149,21 +185,18 @@
 /* RESPONSIVE */
 
 
-@media screen and (max-width: 1420px) {
-    .horizontal.header  {
-        flex-direction: column;
-        margin-top: 10vh;
-    }
-
-}
-
-@media screen and (max-width:1020px) {
+@media screen and (max-width:726px) {
     .horizontal.header{
-        margin-top: 100px;
+        flex-direction: column;
     }
-    .title{
-        margin-top: 200px;
-        position: relative;
-
+    .horizontal.letter{
+        flex-direction: column;
+    }
+    .horizontal.cooldown{
+        flex-direction: column;
+        gap: 7px;
+    }
+    .settings-header{
+        gap: 10px;
     }
 }

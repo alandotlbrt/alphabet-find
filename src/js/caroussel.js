@@ -12,19 +12,6 @@ function waitForMs(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-
-
-async function typeSentence(sentence, eleRef, delay = 100) {
-    const letters = sentence.split("");
-    let i = 0;
-    const element = document.querySelector(eleRef);
-    console.log(eleRef, element)
-    while (i < letters.length) {
-        await waitForMs(delay);
-        element.textContent += letters[i];
-        i++;
-    }
-}
 async function typeWithCenterLetter(config, eleRef, delay = 250) {
     const { letter, text, color } = config;
     const element = document.querySelector(eleRef);
@@ -42,7 +29,10 @@ async function typeWithCenterLetter(config, eleRef, delay = 250) {
 
     element.innerHTML = ""; 
 
+    const cursor = document.getElementById('cursor');
+    cursor.style.visibility = "visible"
     for (let i = 0; i < text.length; i++) {
+
         const span = document.createElement("span");
 
         if (i === index) {
@@ -91,6 +81,8 @@ async function deleteSentence(eleRef, delay = 100) {
     }
 
     while (element.textContent.length > 0) {
+      
+    
         await waitForMs(delay);
 
         const lastChild = element.lastChild;
@@ -105,6 +97,10 @@ async function deleteSentence(eleRef, delay = 100) {
             element.removeChild(lastChild);
         }
     }
+     const cursor = document.getElementById('cursor');
+    cursor.style.visibility = "hidden"
+
+
 }
 export async function carousel( eleRef) {
     let carouselList = carouselText
