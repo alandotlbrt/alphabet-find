@@ -44,6 +44,11 @@
     gap: 5px;
 }
 
+.horizontal.range-bar-example{
+    margin-left: 58vmin;
+    gap: 10px;
+}
+
 
 
 
@@ -60,7 +65,7 @@
 .title {
     gap: 1rem;
     width: 90vw;
-    margin: 22vmin;
+    margin: 20vmin;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,6 +82,10 @@
     display: inline-block;
     max-width: 100%; 
     margin-left: 3.1vmin;
+}
+
+.title span{
+    margin-top: 0.5vh;
 }
 
 
@@ -163,6 +172,7 @@
 }
 
 .svg_sound {
+    margin-left: 5px;
     cursor: pointer;
     transition: .3s;
 }
@@ -171,6 +181,26 @@
     transform: scale(1.2);
     transition: .3s;
 
+}
+
+.letter_exemple {
+    display: none;
+    color: grey !important;
+    font-style: italic;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    display: inline-block;
+    width: 55vmin;
+    white-space: nowrap; 
+    overflow: hidden; 
+}
+
+.letter_exemple.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 50px;
 }
 
 
@@ -198,9 +228,26 @@
 /* RESPONSIVE */
 
 
-@media screen and (max-width:1368px) {
+@media screen and (max-width:1000px) {
+    .horizontal.range-bar-example{
+        flex-direction: column;
+        margin-left: 0;
+    }
+    .letter_exemple{
+        max-height: 0;
+    }
+}
+
+
+@media screen and (max-width:1186px) {
       .horizontal.letter{
         flex-direction: column;
+    }
+    .horizontal.header{
+        flex-direction: column;
+    }
+    .svg_sound{
+        margin-left: 5px;
     }
 }
 
