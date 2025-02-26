@@ -94,7 +94,7 @@ export default{
       input_value: localStorage.getItem('input_value') ? localStorage.getItem('input_value') : 25,
       error_show: false,
       muted: localStorage.getItem('muted') === 'false' ? false : this.muted_value_stored(),
-      cooldown: localStorage.getItem('cooldown') ? localStorage.getItem('cooldown') : "none",
+      cooldown: localStorage.getItem('cooldown') ? localStorage.getItem('cooldown') : this.cooldown_value_init(),
       alphabet : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
       letter_exemple: "",
     }
@@ -106,8 +106,12 @@ export default{
       return true
     },
 
-    active_home(){
+    cooldown_value_init(){
+      localStorage.setItem('cooldown', "none")
+      return "none"
+    },
 
+    active_home(){
       const clickables = document.querySelectorAll('.letter');
       clickables.forEach(element=>{
         if (this.alphabet_slice.includes(element.textContent)){
@@ -115,6 +119,7 @@ export default{
         }
       });
       const cooldown = document.querySelectorAll('.time');
+    
       cooldown.forEach(element=>{
         if (element.textContent ==  this.cooldown){
           element.classList.add('clicked')
@@ -156,7 +161,6 @@ export default{
         }
 
       });
-      console.log(localStorage.getItem('alphabet'))
     },
 
     activeAllClicked() {
@@ -186,9 +190,11 @@ export default{
     },
 
     redirectionToPlay(){
+    
       const clickables = document.querySelectorAll('.clicked');
       if (clickables.length > 0 && Array.from(clickables).some(el => el.classList.contains('letter'))){
         localStorage.setItem('muted', this.muted)
+
         this.$router.push({ name: 'game', query: { alphabet_slice: this.alphabet_slice , input_value : this.input_value} });
       } else {
         this.error_show = true
