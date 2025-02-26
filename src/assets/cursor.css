@@ -23,9 +23,9 @@
 .input-cursor {
     display: inline-block;
     width: 2px;
-    height:9vh;
-    margin-left: 10px;
-    margin-right: 10px;
+    height:8vh;
+    margin-left: 1vmin;
+    margin-right: 1vmin;
     background-color: white;
 
 }

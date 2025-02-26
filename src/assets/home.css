@@ -17,6 +17,15 @@
     gap: 1rem;
 }
 
+
+.input-gap-right{
+    margin-left: -5px;
+}
+
+.input-gap-left{
+    margin-left: 50px;
+}
+
 .horizontal.header{
     display: flex;
     gap: 15px;
@@ -32,8 +41,11 @@
 }
 .horizontal.range-bar {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
+
+
+
 
 .horizontal.cooldown{
     display: flex;
@@ -64,12 +76,12 @@
     overflow-wrap: break-word;
     display: inline-block;
     max-width: 100%; 
-    margin-left: 12px;
+    margin-left: 3.1vmin;
 }
 
 
 .placeholder {
-    letter-spacing: 8px;
+    letter-spacing: 7px;
     transition: color 0.3s linear;
 }
 
@@ -163,6 +175,8 @@
 
 
 
+
+
 @keyframes successEffect {
     0% {
         transform: scale(1);
@@ -183,6 +197,12 @@
 
 /* RESPONSIVE */
 
+
+@media screen and (max-width:1368px) {
+      .horizontal.letter{
+        flex-direction: column;
+    }
+}
 
 @media screen and (max-width:726px) {
     .horizontal.header{

@@ -1,9 +1,9 @@
 import app from "../main.js";
 
 const carouselText = [
-    { letter:"B", text: "ABCDEFGH", color: "#744b76" },
+  /*   { letter:"B", text: "ABCDEFGH", color: "#744b76" }, */
     { letter:"A", text: "ABC", color: "#744b76" },
-    { letter:"C", text: "ABC", color: "#744b76" },
+   /*  { letter:"C", text: "ABC", color: "#744b76" }, */
 
 
 ];

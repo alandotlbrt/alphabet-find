@@ -1,19 +1,19 @@
 <template>
-    
-    
-    <div class="center lost-game">  
-        <div class="score-div">
-            <span>Score: <span>{{ score }}</span></span>|
-            <span>Total of letter: <span>{{ letter_succesful }}</span></span> |
-            <span>Timer: <span>{{ timer }}</span></span> 
-        </div>
-        <h1>{{ failchat }}</h1>
-   
-        <div class="horizontal button-gap">
-            <button class="replay-button"@click="redirectionToPlay">again</button>
-            <router-link to="/">
-                <button class="no">stop</button>
-            </router-link>
+    <div class="failur-body">
+        <div class="center lost-game">  
+            <div class="score-div">
+                <span>Score: <span>{{ score }}</span></span><span class="sep-fail">|</span>
+                <span>Total of letter: <span>{{ letter_succesful }}</span></span><span class="sep-fail">|</span>
+                <span>Timer: <span>{{ timer }}</span></span> 
+            </div>
+            <h1>{{ failchat }}</h1>
+            
+            <div class="horizontal button-gap">
+                <button class="replay-button"@click="redirectionToPlay">again</button>
+                <router-link to="/">
+                    <button class="no">stop</button>
+                </router-link>
+            </div>
         </div>
     </div>
     <audio id="fail_audio">

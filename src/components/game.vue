@@ -1,8 +1,8 @@
 <template>
-    <div class="game-page">
+    <div class="game-page" @click="focusInput">
       <header class="game-header">
-          <span>Round: {{ victories }}</span>
-          <span>Letters: {{ letter_succesful }}</span>
+          <span>Rounds: {{ victories }}</span>
+          <span>Total Letters: {{ letter_succesful }}</span>
           <span >Timer: <span id="timer">{{ timer }}</span></span>
         </header>
       
@@ -10,25 +10,25 @@
             <button @click="redirect_home" class="red-button">Leave</button>
           <p v-if="cooldown != 'none' && cooldown != null" id="cooldown"> {{ remainingSeconds }}s left </p>
         </header>
-      <div @click="focusInput">
-        <input ref="hiddenInput" type="text" class="hidden-input" @input="handleInput" :maxlength=letter_lenght />
-          <div class="text-typing-div" @click="focusInput">
-              <div class="vertical typing">
-                  <div class="horizontal input-gap-right" v-if="direction=='left'">
-                      <span class="input-cursor"></span>
-                      <div class="word"> <span class="user-input">{{ userInput }}</span><span class="choosen-letter">{{ choosen_letter }}</span></div>
-                  </div>
-                  <div class="horizontal input-gap-left" v-if="direction=='right'">
-                      <div class="word"> <span class="choosen-letter">{{ choosen_letter }}</span><span class="user-input">{{ userInput }}</span> <span class="input-cursor"></span></div>
-                  </div>
-                  <div class="indication">
-                    <h1 v-if="direction=='left'"><--</h1>
-                    <h1 v-else>--></h1>
-                    <h1>{{ letter_left }}</h1>
-                  </div>
-              </div>
+        <div class="vertical">
+          <input ref="hiddenInput" type="text" class="hidden-input" @input="handleInput" :maxlength=letter_lenght />
+          <div class="input-div-typing" @click="focusInput">
+            <div class="input-left" v-if="direction=='left'">
+              <span class="input-cursor game"></span>
+              <span class="user-input">{{ userInput }}</span><span class="choosen-letter">{{ choosen_letter }}</span>
+            </div>
+            <div class="input-right"  v-if="direction=='right'">
+              <span class="choosen-letter">{{ choosen_letter }}</span><span class="user-input">{{ userInput }}</span> 
+              <span class="input-cursor game"></span>
+            </div>
+            
           </div>
-      </div>
+          <div class="letter-left">
+            <p v-if="direction=='left'"><---</p>
+            <p v-else>---></p>
+            {{ letter_left }}
+          </div>
+        </div>
     </div>
     
     <audio id="tic-tac">

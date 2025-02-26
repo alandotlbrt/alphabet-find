@@ -1,4 +1,12 @@
 
+.failur-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .loose-header{
     display: flex;
     justify-content: center;
@@ -8,11 +16,23 @@
     font-size: 200px;
 }
 
+
+.center.lost-game {
+    max-width: 90%;
+
+}
+.center.lost-game h1{
+    text-align: center;
+}
+
 .loose-header h3{
     font-size: 120px;
     color:#cc334c;
 }
 
+.lost-game{
+    width: 100vw;
+}
 
 .red-score{
     color: #cc334c;
@@ -65,14 +85,30 @@
 .replay-button{
     background-color: #4D764B;
 }
-
-
-
 .score-div{
     color: grey;
     display: flex;
+    flex-direction: row;
     gap: 10px;
-    font-size: 40px;
+    font-size: 3vh;
     margin-bottom: -1vh;
 }
 
+
+.sep-fail{
+    display: block;
+}
+
+/* RESPONSIVE  */
+
+
+@media screen and (max-width:580px) {
+    .score-div{
+    
+        flex-direction: column;
+        align-items: center;
+    }
+    .sep-fail{
+        display: none;
+    }
+}
