@@ -82,9 +82,11 @@ import { stop_timer } from '../js/game/timer.js';
 
 export default{
   mounted(){  
+    
       stop_timer()
       carousel("#carousel");    
       this.active_home()
+      console.log(localStorage.getItem('cooldown'))
 
 
   },
@@ -107,6 +109,7 @@ export default{
     },
 
     cooldown_value_init(){
+
       localStorage.setItem('cooldown', "none")
       return "none"
     },
@@ -189,7 +192,7 @@ export default{
     },
 
     redirectionToPlay(){
-    
+      localStorage.setItem('cooldown', this.cooldown)
       const clickables = document.querySelectorAll('.clicked');
       if (clickables.length > 0 && Array.from(clickables).some(el => el.classList.contains('letter'))){
         localStorage.setItem('muted', this.muted)
