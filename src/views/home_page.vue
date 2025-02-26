@@ -110,7 +110,6 @@ export default{
       localStorage.setItem('cooldown', "none")
       return "none"
     },
-
     active_home(){
       const clickables = document.querySelectorAll('.letter');
       clickables.forEach(element=>{
