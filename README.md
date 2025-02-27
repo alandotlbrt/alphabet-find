@@ -8,6 +8,6 @@ For technologies I used Vue, for the build I used terser and for the deployment 
 
 # Contact & link
 
-<br>Project-Website : [Find-Alphabet](find-alphabet.eu)
+Project-Website : [Find-Alphabet](find-alphabet.eu)
 <br>Linkedin : [alandotlbrt](https://www.linkedin.com/in/alandotlbrt/)
 <br>Mail : alanlebrument@icloud.com 
