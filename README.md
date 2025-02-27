@@ -1,29 +1,13 @@
 # find-alphabet
 
-This template should help get you started developing with Vue 3 in Vite.
+this project is my first website, it allows you to know if you know your alphabet, yes that's all.
 
-## Recommended IDE Setup
+## Technos 
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+For technologies I used Vue, for the build I used terser and for the deployment github actions
 
-## Customize configuration
+# Contact & link
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Project-Website : [Find-Alphabet](find-alphabet.eu)
+Linkedin : [alandotlbrt](https://www.linkedin.com/in/alandotlbrt/)
+Mail : alanlebrument@icloud.com 
