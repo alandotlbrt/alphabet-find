@@ -126,4 +126,7 @@
     .game-header {
       flex-direction: column;
     }
+    .input-div-typing{
+      margin-top: 5vmin;
+    }
 }
